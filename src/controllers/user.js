@@ -20,15 +20,17 @@ const signinUser = async (req, res) => {
     //Revisar que sea un usuario registrado
     const user = await User.findOne({ email });
     if (!user) {
-      res.status(400).json({ err: 'Email o contraseña icorrectos' });
+      console.log('email');
+      res.status(400).json({ err: 'Email o contraseña incorrectos' });
       return;
     }
-
+    console.log(password)
     //Revisar el password
     const isMatch = await bcryptjs.compare(password, user.password);
 
     if (!isMatch) {
-      res.status(400).json({ err: 'Email o contraseña icorrectos' });
+      console.log('contraseña');
+      res.status(400).json({ err: 'Email o contraseña incorrectos' });
       return;
     }
 
@@ -45,7 +47,7 @@ const signinUser = async (req, res) => {
 
 const signupUser = async (req, res) => {
   //Extraer email y password
-  const { email, password } = req.body;
+  const { email } = req.body;
 
   try {
     //Revidar que el usuario registrado sea unico
@@ -57,8 +59,6 @@ const signupUser = async (req, res) => {
 
     //Crear el nuevo usuario
     user = new User(req.body);
-
-    user.password = await User.hashPassword(password);
 
     //Guardar el muevo usuario
     await user.save();
