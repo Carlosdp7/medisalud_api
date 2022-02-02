@@ -43,7 +43,7 @@ userSchema.statics.generateAuthToken = async (id) => {
 
   //Firmar e JWT
   const token = await jwtSign(payload, process.env.JWT_SEED, {
-    expiresIn: '24h'
+    expiresIn: process.env.JWT_EXP
   })
 
   return token;
