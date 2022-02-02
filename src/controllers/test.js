@@ -33,7 +33,7 @@ const createTest = async (req, res) => {
     test.qrcode = code;
 
     ////Build Gatsby
-    //await axios.post('');
+    await axios.post(process.env.BUILD_WEBHOOK);
   }
 
   await test.save();
@@ -67,7 +67,7 @@ const updateTest = async (req, res) => {
   await testDB.save();
 
   ////Build Gatsby
-  //await axios.post('');
+  await axios.post(process.env.BUILD_WEBHOOK);
 
   res.send({ test: testDB });
 }
@@ -88,7 +88,7 @@ const deleteTest = async (req, res) => {
   await testDB.save();
 
   //Build Gatsby
-  //await axios.post('');
+  await axios.post(process.env.BUILD_WEBHOOK);
 
   res.send({ msg: 'Test eliminado correctamente' });
 }
