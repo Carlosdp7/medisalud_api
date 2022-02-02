@@ -27,7 +27,7 @@ const obtainTest = async (req, res) => {
 const createTest = async (req, res) => {
   const test = new Test(req.body);
 
-  if (req.body.result) {
+  if (req.body.result !== undefined) {
     const code = await qrCode(`${process.env.CLIENT_URL}/resultado-${test._id}/`);
 
     test.qrcode = code;
@@ -54,8 +54,8 @@ const updateTest = async (req, res) => {
 
   delete req.body.isDelete;
 
-  if (!testDB.result && req.body.result) {
-    const code = await qrCode(`${process.env.CLIENT_URL}/resultado-${testDB.id}`);
+  if (testDB.result === null && req.body.result !== undefined) {
+    const code = await qrCode(`${process.env.CLIENT_URL}/resultado-${testDB._id}/`);
 
     testDB.set({
       qrcode: code
