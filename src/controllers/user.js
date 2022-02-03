@@ -8,7 +8,6 @@ const obtainAuthUser = async (req, res) => {
 
     res.json({ user });
   } catch (err) {
-    console.log(err);
     res.status(500).json({ err: 'Hubo un error' });
   }
 }
@@ -20,16 +19,14 @@ const signinUser = async (req, res) => {
     //Revisar que sea un usuario registrado
     const user = await User.findOne({ email });
     if (!user) {
-      console.log('email');
       res.status(400).json({ err: 'Email o contraseña incorrectos' });
       return;
     }
-    console.log(password)
+
     //Revisar el password
     const isMatch = await bcryptjs.compare(password, user.password);
 
     if (!isMatch) {
-      console.log('contraseña');
       res.status(400).json({ err: 'Email o contraseña incorrectos' });
       return;
     }

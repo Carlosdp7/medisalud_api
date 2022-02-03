@@ -1,4 +1,4 @@
-const { Test, resultType } = require("../models/test");
+const { Test } = require("../models/test");
 const axios = require('axios');
 const util = require('util');
 const QRCode = require('qrcode')
@@ -83,7 +83,7 @@ const deleteTest = async (req, res) => {
     })
   }
 
-  testDB.set({ isDelete: true });
+  testDB.set({ isDelete: true, isValid: false });
 
   await testDB.save();
 
