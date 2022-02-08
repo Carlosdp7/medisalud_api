@@ -2,7 +2,6 @@ require('./src/db/mongoose');
 const express = require('express');
 const cors = require('cors');
 const routes = require('./src/routes/index');
-const { obtainTests } = require('./src/controllers/test');
 const app = express();
 const port = process.env.PORT;
 
@@ -20,8 +19,6 @@ app.get('/api/verification', (req, res) => {
 });
 
 app.use(routes);
-
-app.get('/', obtainTests);
 
 app.all('*', (req, res) => {
   res.status(404).send({
