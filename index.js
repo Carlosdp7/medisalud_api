@@ -6,9 +6,7 @@ const app = express();
 const port = process.env.PORT;
 
 //Middlewares
-app.use(cors({
-  origin: process.env.CLIENT_URL
-}));
+app.use(cors());
 app.use(express.json());
 
 //Routes
