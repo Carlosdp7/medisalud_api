@@ -54,7 +54,11 @@ router.post('/test/create-test', auth, [
   body('time')
     .notEmpty()
     .withMessage('La hora es requerida')
-    .isString()
+    .isString(),
+  body('admissionDate')
+    .notEmpty()
+    .withMessage('La fecha de ingreso es requerida')
+    .isDate()
 ], validateResult, createTest);
 
 router.put('/test/update-test/:id', auth, [
@@ -90,7 +94,10 @@ router.put('/test/update-test/:id', auth, [
     .isBoolean(),
   body('time')
     .if(body('time').exists())
-    .isString()
+    .isString(),
+  body('admissionDate')
+    .if(body('admissionDate').exists())
+    .isDate()
 ], validateResult, updateTest);
 
 router.delete('/test/delete-test/:id', auth, [

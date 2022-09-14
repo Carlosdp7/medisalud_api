@@ -55,6 +55,10 @@ const testSchema = new mongoose.Schema({
   time: {
     type: String,
     required: true
+  },
+  admissionDate: {
+    type: mongoose.Schema.Types.Date,
+    required: true
   }
 }, {
   timestamps: true,
